@@ -1,19 +1,11 @@
 <?php
 
-
-    $isEmailValid = null;
+    include_once __DIR__ . '/utilities/functions.php';
 
     if (!empty($_GET['email'])){
         $isEmailValid = checkAtAndDot($_GET['email']);
     }
 
-    function checkAtAndDot($haystack){
-        if (str_contains($haystack, '@') && str_contains($haystack, '.') ){
-            return true;
-        }
-
-        return false;
-    }
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +41,7 @@
                         I am sorry, but your mail is not correct, please enter a valid email address to ROAR with us!
                     </div>
                 </div>
-            <?php }?>
+            <?php } ?>
         </div>
     </div>
 </body>
