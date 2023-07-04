@@ -1,11 +1,15 @@
 <?php
-
+    session_start();
     include_once __DIR__ . '/utilities/functions.php';
 
     if (!empty($_GET['email'])){
         $isEmailValid = checkAtAndDot($_GET['email']);
-    }
 
+        if ($isEmailValid){
+            $_SESSION['email'] = $_GET['email'];
+        }
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,13 @@
 <body>
     <div class="container">
         <div class="row">
+            <?php if (!empty($_SESSION['email'])) { ?>
+                <div class="col-12 text-end">
+                    <p>
+                        Welcome, <?php echo $_SESSION['email']; ?>!
+                    </p>
+                </div>
+            <?php }  ?>
             <form class="col-12 mb-3" action="./index.php" method="GET">
                 <h1>
                     Subscribe to our new newsletter OF ROARING news!
@@ -28,6 +39,7 @@
                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
                 </div>
                 <input type="submit" value="Subscribe" class="btn btn-xl btn-primary">
+                <input type="reset" value="Reset" class="btn btn-xl btn-warning">
             </form>
             <?php if ($isEmailValid === true) { ?>
                 <div class="col-12">
